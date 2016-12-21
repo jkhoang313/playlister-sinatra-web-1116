@@ -5,8 +5,10 @@
     <title>Song</title>
   </head>
   <body>
-    <%= "Successfully created song." %>
-    <%= "Successfully updated song." %>
+    <% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+
     <%= @song.name %>
     <a href = "/artists/<%= @song.artist.slug%>"><%= @song.artist.name %></a>
     <% @song.genres.each do |genre| %>

@@ -1,4 +1,5 @@
 class SongController < ApplicationController
+
   get '/songs' do
     @songs = Song.all
 
@@ -7,6 +8,7 @@ class SongController < ApplicationController
 
   get '/songs/new' do
     @genres = Genre.all
+
     erb :'/songs/new'
   end
 
@@ -39,6 +41,9 @@ class SongController < ApplicationController
     end
 
     @song.update(name: params[:song_name], artist: @artist)
+
+    flash[:message] = "Successfully updated song."
+
     redirect "/songs/#{@song.slug}"
   end
 
@@ -59,6 +64,8 @@ class SongController < ApplicationController
       @song.genres << @genre
       @genre.songs << @song
     end
+
+    flash[:message] = "Successfully created song."
 
     redirect "/songs/#{@song.slug}"
   end
